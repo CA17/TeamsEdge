@@ -1,0 +1,13 @@
+.idea
+__pycache__
+.vscode
+/resources/*.xlsx
+/release/
+release
+/common/static/static.go
+/common/resources/resources.go
+/Dockerfile.local
+/abfs
+/labfs
+/deployment/freeradius/lfreemate
+__debug_bin
