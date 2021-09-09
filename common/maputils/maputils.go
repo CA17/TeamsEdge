@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/teamsweHere/teamsedge-hy/common"
+	"github.com/ca17/teamsedge/common"
 )
 
 func GetStringValue(d map[string]interface{}, key string, defval string) string {

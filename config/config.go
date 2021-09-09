@@ -1,12 +1,13 @@
 package config
 
 import (
-	"github.com/teamsweHere/teamsedge-hy/common"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path"
 	"strconv"
+
+	"github.com/ca17/teamsedge/common"
+	"gopkg.in/yaml.v2"
 )
 
 // SysConfig 系统配置
@@ -98,8 +99,8 @@ var DefaultAppConfig = &AppConfig{
 		NbiUrl:    "http://127.0.0.1:1879",
 		PgResturl: "http://127.0.0.1:3080",
 		Secret:    "9b6de5cc-0731-4bf1-zpms-0f568ac9da37",
-		SubAddr:   "tcp://127.0.0.1:1870",
-		PubAddr:   "tcp://127.0.0.1:1871",
+		PubAddr:   "tcp://127.0.0.1:1935",
+		SubAddr:   "tcp://127.0.0.1:1936",
 		Debug:     false,
 	},
 }
