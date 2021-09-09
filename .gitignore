@@ -11,3 +11,4 @@ release
 /labfs
 /deployment/freeradius/lfreemate
 __debug_bin
+/teamsedge.yml

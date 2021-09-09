@@ -12,10 +12,6 @@ COMMIT_SUBJECT     := $(shell git show -s --format=%s )
 
 clean:
 	rm -f teamsedge
-
-gen:
-	go generate
-
 build:
 	go generate
 	CGO_ENABLED=0 go build -a -ldflags \
@@ -33,6 +29,7 @@ build:
     -o ${BUILD_NAME} ${SOURCE}
 
 build-linux:
+	echo ${RELEASE_VERSION}_${BUILD_TIME} > ./assets/build.txt
 	go generate
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags \
 	'\
@@ -48,42 +45,16 @@ build-linux:
 	' \
     -o ${RELEASE_DIR}/${BUILD_NAME} ${SOURCE}
 
-pubbuild-pre:
-	make build-linux
-	make upx
-	echo 'FROM python:3.9.6-alpine3.14' > .build
-	echo 'RUN apk add --no-cache tzdata' >> .build
-	echo 'RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime' >> .build
-	echo 'RUN apk add --no-cache curl' >> .build
-	echo 'RUN pip install pysocks requests' >> .build
-	echo 'ARG CACHEBUST="$(shell date "+%F %T")"' >> .build
-	echo 'COPY ./teamsedge /teamsedge' >> .build
-	echo 'RUN chmod +x /teamsedge' >> .build
-	echo 'ENTRYPOINT ["/teamsedge"]' >> .build
-
-
-pubdev:
-	make pubbuild-pre
-	docker build -t teamsedge . -f .teamsedgebuild \
-	&& sudo docker tag teamsedge alab.189csp.cn:5000/teamsedge-hy:dev \
-	&& sudo docker push alab.189csp.cn:5000/teamsedge-hy:dev \
-	&& rm -f /tmp/teamsedge \
-	&& rm -f /tmp/.teamsedgebuild "
-	rm -f .build
-
 fastpub:
-	make pubbuild-pre
-	ssh DockerServer "cd /tmp \
-	&& sudo docker build -t teamsedge . -f .teamsedgebuild \
-	&& sudo docker tag teamsedge alab.189csp.cn:5000/teamsedge-hy:latest \
-	&& sudo docker push alab.189csp.cn:5000/teamsedge-hy:latest \
-	&& rm -f /tmp/teamsedge \
-	&& rm -f /tmp/.teamsedgebuild "
-	rm -f .build
-
-
-upx:
-	upx ${RELEASE_DIR}/${BUILD_NAME}
+	echo "BuildVersion=${BUILD_VERSION}" > assets/build.txt
+	echo "ReleaseVersion=${RELEASE_VERSION}" >> assets/build.txt
+	echo "BuildTime=${BUILD_TIME}" >> assets/build.txt
+	echo "BuildName=${BUILD_NAME}" >> assets/build.txt
+	echo "CommitID=${COMMIT_SHA1}" >> assets/build.txt
+	echo "CommitDate=${COMMIT_DATE}" >> assets/build.txt
+	echo "CommitUser=${COMMIT_USER}" >> assets/build.txt
+	echo "CommitSubject=${COMMIT_SUBJECT}" >> assets/build.txt
+	docker build --build-arg BTIME="$(shell date "+%F %T")" -t teamsedge . -f Dockerfile
 
 ci:
 	@read -p "type commit message: " cimsg; \

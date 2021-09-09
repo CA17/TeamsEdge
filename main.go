@@ -3,29 +3,22 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/teamsweHere/teamsedge-hy/common/installer"
-	"github.com/teamsweHere/teamsedge-hy/config"
-	"github.com/teamsweHere/teamsedge-hy/jobs"
-	"github.com/teamsweHere/teamsedge-hy/service/app"
 	"log"
 	"os"
 	"runtime"
 	_ "time/tzdata"
+
+	"github.com/ca17/teamsedge/assets"
+	"github.com/ca17/teamsedge/common/installer"
+	"github.com/ca17/teamsedge/config"
+	"github.com/ca17/teamsedge/jobs"
+	"github.com/ca17/teamsedge/service/app"
 
 	"golang.org/x/sync/errgroup"
 )
 
 var (
 	g errgroup.Group
-
-	BuildVersion   string
-	ReleaseVersion string
-	BuildTime      string
-	BuildName      string
-	CommitID       string
-	CommitDate     string
-	CommitUser     string
-	CommitSubject  string
 )
 
 // 命令行定义
@@ -40,19 +33,12 @@ var (
 
 // PrintVersion Print version information
 func PrintVersion() {
-	fmt.Fprintf(os.Stdout, "build name:\t%s\n", BuildName)
-	fmt.Fprintf(os.Stdout, "build version:\t%s\n", BuildVersion)
-	fmt.Fprintf(os.Stdout, "build time:\t%s\n", BuildTime)
-	fmt.Fprintf(os.Stdout, "release version:\t%s\n", ReleaseVersion)
-	fmt.Fprintf(os.Stdout, "Commit ID:\t%s\n", CommitID)
-	fmt.Fprintf(os.Stdout, "Commit Date:\t%s\n", CommitDate)
-	fmt.Fprintf(os.Stdout, "Commit Username:\t%s\n", CommitUser)
-	fmt.Fprintf(os.Stdout, "Commit Subject:\t%s\n", CommitSubject)
+	fmt.Println(assets.BuildInfo)
 }
 
 func printHelp() {
 	if *h {
-		ustr := fmt.Sprintf("%s version: %s, Usage:%s -h\nOptions:", BuildName, BuildVersion, BuildName)
+		ustr := fmt.Sprintf("TeamsEdge Usage: teamsacs -h\n")
 		fmt.Fprintf(os.Stderr, ustr)
 		flag.PrintDefaults()
 		os.Exit(0)
