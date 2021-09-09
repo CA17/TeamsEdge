@@ -17,8 +17,8 @@
 package installer
 
 import (
-	"github.com/teamsweHere/teamsedge-hy/common"
-	"github.com/teamsweHere/teamsedge-hy/config"
+	"github.com/ca17/teamsedge/common"
+	"github.com/ca17/teamsedge/config"
 	"io/ioutil"
 	"os"
 	"os/exec"

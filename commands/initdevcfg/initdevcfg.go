@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/teamsweHere/teamsedge-hy/config"
-	"gopkg.in/yaml.v2"
 	"os"
+
+	"github.com/ca17/teamsedge/config"
+	"gopkg.in/yaml.v2"
 )
 
 // 初始化一个本地开发配置文件, 不会提交到git仓库， 可以本地随意修改
