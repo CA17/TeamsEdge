@@ -47,9 +47,9 @@ build-linux:
 
 fastpub:
 	echo "BuildVersion=${BUILD_VERSION}" > assets/build.txt
+	echo "BuildName=${BUILD_NAME}" >> assets/build.txt
 	echo "ReleaseVersion=${RELEASE_VERSION}" >> assets/build.txt
 	echo "BuildTime=${BUILD_TIME}" >> assets/build.txt
-	echo "BuildName=${BUILD_NAME}" >> assets/build.txt
 	echo "CommitID=${COMMIT_SHA1}" >> assets/build.txt
 	echo "CommitDate=${COMMIT_DATE}" >> assets/build.txt
 	echo "CommitUser=${COMMIT_USER}" >> assets/build.txt

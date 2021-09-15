@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	Config           *config.AppConfig
+	Config  *config.AppConfig
 	pubsock mangos.Socket
 	subsock mangos.Socket
 )
@@ -74,5 +74,3 @@ func StartPublish() {
 	}
 	log.Println(fmt.Sprintf("publish client connect to server subaddr %s", Config.Teamsacs.SubAddr))
 }
-
-
