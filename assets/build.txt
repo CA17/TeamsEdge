@@ -1,8 +1,8 @@
+BuildName=teamsedge
 BuildVersion=latest
 ReleaseVersion=v1.0.1
-BuildTime=2021-09-09 23:47:16
-BuildName=teamsedge
-CommitID=1afcdae357b14da53ce7426b234a0bbfefd9c1ef
-CommitDate=Fri, 3 Sep 2021 16:06:35 +0800
+BuildTime=2021-09-15 22:53:22
+CommitID=f8648af4da54e875b02f55ccdac6cc188275caa6
+CommitDate=Thu, 9 Sep 2021 23:49:04 +0800
 CommitUser=jamiesun.net@gmail.com
-CommitSubject=init
+CommitSubject=2021-09-09 23:48:58 : pub sub

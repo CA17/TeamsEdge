@@ -22,7 +22,6 @@ type SysConfig struct {
 // TeamsacsConfig TeamsACS 配置
 type TeamsacsConfig struct {
 	NbiUrl    string `yaml:"nbi_url"`    // Teamsacs 北向接口地址
-	PgResturl string `yaml:"pg_resturl"` // T数据库 rest接口地址
 	Secret    string `yaml:"secret"`     // JWT 密钥
 	SubAddr   string `yaml:"sub_addr"`   // 订阅地址
 	PubAddr   string `yaml:"pub_addr"`   // 发布地址
@@ -97,7 +96,6 @@ var DefaultAppConfig = &AppConfig{
 	},
 	Teamsacs: TeamsacsConfig{
 		NbiUrl:    "http://127.0.0.1:1879",
-		PgResturl: "http://127.0.0.1:3080",
 		Secret:    "9b6de5cc-0731-4bf1-zpms-0f568ac9da37",
 		PubAddr:   "tcp://127.0.0.1:1935",
 		SubAddr:   "tcp://127.0.0.1:1936",
@@ -123,7 +121,6 @@ func LoadConfig(cfile string) *AppConfig {
 	setEnvValue("TEAMSEDGE_SYSTEM_WORKER_DIR", &cfg.System.Workdir)
 	setEnvBoolValue("TEAMSEDGE_SYSTEM_DEBUG", &cfg.System.Debug)
 	setEnvValue("TEAMSACS_NBIURL", &cfg.Teamsacs.NbiUrl)
-	setEnvValue("TEAMSACS_PG_RESTURL", &cfg.Teamsacs.PgResturl)
 	setEnvValue("TEAMSACS_SECRET", &cfg.Teamsacs.Secret)
 
 	// 订阅发布配置

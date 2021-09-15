@@ -24,7 +24,6 @@ var (
 // 命令行定义
 var (
 	h         = flag.Bool("h", false, "help usage")
-	showVer   = flag.Bool("v", false, "show version")
 	conffile  = flag.String("c", "/etc/teamsacs.yaml", "config yaml/json file")
 	install   = flag.Bool("install", false, "run install")
 	uninstall = flag.Bool("uninstall", false, "run uninstall")
@@ -49,10 +48,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	flag.Parse()
 
-	if *showVer {
-		PrintVersion()
-		os.Exit(0)
-	}
+	PrintVersion()
 
 	printHelp()
 
