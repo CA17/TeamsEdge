@@ -4,7 +4,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ca17/teamsedge/common/sysid"
 	"github.com/ca17/teamsedge/service/app"
 	"github.com/ca17/teamsedge/service/models"
 	"github.com/robfig/cron/v3"
@@ -37,8 +36,8 @@ func Init() {
 
 	// 定时上报任务
 	addNamedJob(app.EdgeInformTask, newNamedJob(Sched.AddFunc("@every 60s", func() {
-		app.Publish(models.TeamsEdgeInform, models.EdgeInformMessage{
-			Eid: sysid.GetSystemSid(),
+		app.Publish(app.TeamsEdgeInform, models.EdgeInformMessage{
+			Eid: app.GetEdgeID(),
 		})
 	})))
 
