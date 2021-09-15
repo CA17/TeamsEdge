@@ -26,7 +26,11 @@ func Init(cfg *config.AppConfig) {
 	StartPublish()
 
 	// 发布启动消息
-	Publish(models.TeamsEdgeBootstrap, models.EdgeBootstrapMessage{Eid: sysid.GetSystemSid()})
+	Publish(TeamsEdgeBootstrap, models.EdgeBootstrapMessage{Eid: GetEdgeID()})
+}
+
+func GetEdgeID() string {
+	return sysid.GetSystemSid()
 }
 
 // StartSubscribe 启动边缘节点消息订阅
@@ -44,6 +48,10 @@ func StartSubscribe() error {
 	// 订阅客户端连接服务端的发布端口
 	if err = subsock.Dial(Config.Teamsacs.PubAddr); err != nil {
 		return fmt.Errorf("subscribe client connect to server error %s", err.Error())
+	}
+
+	if err := subsock.SetOption(mangos.OptionSubscribe, []byte(GetEdgeID())); err != nil {
+		return err
 	}
 
 	log.Println(fmt.Sprintf("subscribe client connect to server pubaddr %s", Config.Teamsacs.PubAddr))
